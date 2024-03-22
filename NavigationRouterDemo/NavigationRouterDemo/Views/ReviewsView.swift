@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RouteManager
 
 struct MovieReviews: View {
     let reviews: [Review]
@@ -30,7 +29,7 @@ struct MovieReviews: View {
                 Image(systemName: "house")
                     .foregroundColor(.orange)
                     .onTapGesture {
-                        router.popUntil(.movies)
+                        router.popToRoot()
                     }
             }
         }

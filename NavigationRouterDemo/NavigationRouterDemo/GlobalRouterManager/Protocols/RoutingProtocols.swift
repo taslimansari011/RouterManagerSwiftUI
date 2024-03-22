@@ -12,12 +12,17 @@ public protocol RoutingProtocols: AnyObject {
     /// An array representing the current navigation stack of destinations.
     /// Modifying this stack updates the navigation state of the application.
     var stack: [Destination] { get set }
+    /// Store the current navigation path
+    var currentPath: String { get set }
     /// Navigate to a series of views at once
     /// - Parameter routes: routes description
     func routeTo(_ route: Destination)
     /// Navigate to a series of views at once
     /// - Parameter routes: routes description
     func pushMultiple(_ routes: [Destination])
+    /// Replace the stack with the given array of routes
+    /// - Parameter routes: routes description
+    func pushReplacement(_ routes: [Destination])
     /// Pop to the root view in our hierarchy
     func popToRoot()
     /// Go back to the previous view

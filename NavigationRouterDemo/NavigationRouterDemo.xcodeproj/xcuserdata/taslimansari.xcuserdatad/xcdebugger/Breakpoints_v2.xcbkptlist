@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AC3B69AD-00DA-4CF4-81A8-EFC618ECEF95"
-            shouldBeEnabled = "Yes"
+            uuid = "4A35486B-1493-4EF7-AEAB-C60738B6BE6E"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NavigationRouterDemo/AppRoutes.swift"
+            filePath = "NavigationRouterDemo/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "initWith(path:movie:)"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "openURL(url:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

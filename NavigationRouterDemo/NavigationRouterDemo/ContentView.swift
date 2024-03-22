@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RouteManager
 
 struct LoginView: View {
     @AppStorage("login") var login: Bool = false
@@ -47,9 +46,6 @@ enum Tab: Int, CaseIterable {
 
 struct AppTabbarView: View {
     @State var selectedTab = 0
-//    @StateObject var homeRouter: Router<AppRoutes> = .init()
-//    @StateObject var helpRouter = Router<AppRoutes>()
-//    @StateObject var myAccountRouter = Router<AppRoutes>()
     @ObservedObject var tabRouter: TabRouter = TabRouter<AppRoutes>([
         Router(),Router(),Router()
     ])
@@ -81,10 +77,22 @@ struct AppTabbarView: View {
     }
     
     private func openURL(url: URL) {
-        let routes = url.pathComponents.compactMap { component in
-            AppRoutes.initWith(path: component)
+        var isValidPath = true
+        let components = url.pathComponents.filter { component in
+            component != "/"
         }
-        tabRouter.routeTo(tab: routes.first?.tabIndex ?? tabRouter.selectedTab, internalPath: routes)
+        let routes =  components.compactMap { component in
+            let route = AppRoutes.initWith(path: component)
+            if route == nil {
+                isValidPath = false
+            }
+            return route
+        }
+        if isValidPath {
+            tabRouter.handleDeeplink(routes: routes, pathString: url.path())
+        } else {
+            tabRouter.routeToHome()
+        }
     }
 }
 

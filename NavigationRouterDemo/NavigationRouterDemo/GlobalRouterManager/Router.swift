@@ -9,7 +9,14 @@ import SwiftUI
 
 public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     /// Used to programatically control a navigation stack
-    @Published public var stack: [Destination] = []
+    @Published public var stack: [Destination] = [] {
+        didSet {
+            currentPath = stack.map({ route in return route.path }).joined()
+            debugPrint("The CurrentPath is \(currentPath)")
+        }
+    }
+    public var currentPath: String = ""
+    @Published public var selectedTab: Int?
     /// Used to present a view using a sheet
     @Published public var presentingSheet: Destination?
     /// Used to present a view using a full screen cover
@@ -20,7 +27,7 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
         presentingSheet != nil || presentingFullScreenCover != nil
     }
     
-    init(isPresented: Binding<Destination?> = .constant(nil)) {
+    public init(isPresented: Binding<Destination?> = .constant(nil)) {
         self.isPresented = isPresented
     }
     
@@ -32,6 +39,8 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     /// Routes to the specified `Routable`.
     public func routeTo(_ route: Destination) {
         switch route.navigationType {
+        case .tab:
+            selectedTab = route.tabIndex
         case .push:
             push(route)
         case .sheet:
@@ -45,7 +54,17 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     /// - Parameter routes: routes description
     public func pushMultiple(_ routes: [Destination]) {
         routes.forEach { route in
-            stack.append(route)
+            routeTo(route)
+        }
+    }
+    
+    /// Replace the stack with the given array of routes
+    /// - Parameter routes: routes description
+    public func pushReplacement(_ routes: [Destination]) {
+        if routes.isEmpty {
+            popToRoot()
+        } else {
+            stack = routes
         }
     }
     
@@ -96,6 +115,7 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     
     private func push(_ appRoute: Destination) {
         stack.append(appRoute)
+        currentPath.append(appRoute.path)
     }
     
     private func presentSheet(_ route: Destination) {
@@ -110,7 +130,7 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     // on `NavigationType`
     private func router(routeType: NavigationType) -> Router {
         switch routeType {
-        case .push:
+        case .push, .tab:
             return self
         case .sheet:
             return Router(
@@ -127,5 +147,21 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
                 )
             )
         }
+    }
+    
+    public func handleDeeplink(routes: [Destination], isPathPresentInThisStack: Bool) {
+        if isPathPresentInThisStack {
+            if let index = stack.lastIndexOfContiguous(routes) {
+                while stack.count > index + 1 {
+                    stack.removeLast()
+                }
+            }
+        } else {
+            pushMultiple(routes)
+        }
+    }
+    
+    public func isPathPresent(path: String) -> Bool {
+        currentPath.contains(path)
     }
 }

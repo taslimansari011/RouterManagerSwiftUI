@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RouteManager
 
 struct MyAccountView: View {
     @AppStorage("login") var login: Bool = false
@@ -42,6 +41,7 @@ struct ProfileScreen1: View {
         Button("Goto Screen 2") {
             router.routeTo(.profileScreen2)
         }
+        .navigationTitle("ProfileScreen1")
     }
 }
 
@@ -51,6 +51,7 @@ struct ProfileScreen2: View {
         Button("Goto Screen 3") {
             router.routeTo(.profileScreen3)
         }
+        .navigationTitle("ProfileScreen2")
     }
 }
 

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RouteManager
 
 struct MoviesView: View {
     @EnvironmentObject var router: Router<AppRoutes>

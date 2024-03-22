@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CommonErrorView: View {
+struct CommonView: View {
     let message: String
     var body: some View {
         if message.isEmpty {
@@ -18,8 +18,8 @@ struct CommonErrorView: View {
     }
 }
 
-struct CommonErrorView_Previews: PreviewProvider {
+struct CommonView_Previews: PreviewProvider {
     static var previews: some View {
-        CommonErrorView(message: "")
+        CommonView(message: "")
     }
 }

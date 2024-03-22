@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-import RouteManager
 
 /// This file will be used to define all the possible routes in the app and there type of navigation eg. .sheet or .push
 public enum AppRoutes: Routable {
-    case movies
+    case home
+    case help
     case movieDetails(Movie?)
     case movieReviews([Review])
     case defaultScreen(message: String)
@@ -19,10 +19,12 @@ public enum AppRoutes: Routable {
     case profileScreen2
     case profileScreen3
     
-    static func initWith(path: String, movie: Movie? = nil) -> AppRoutes? {
+    public static func initWith(path: String, movie: Movie? = nil) -> AppRoutes? {
         switch path.lowercased() {
-        case "movies":
-            return .movies
+        case "/", "movies":
+            return .home
+        case "help":
+            return .help
         case "details":
             return .movieDetails(movie)
         case "reviews":
@@ -42,32 +44,34 @@ public enum AppRoutes: Routable {
         }
     }
     
-    public var tabIndex: Int {
+    public var tabIndex: Int? {
         switch self {
-        case .movies:
+        case .home:
             return 0
+        case .help:
+            return 1
         case .myAccount:
             return 2
         default:
-            return 0
+            return nil
         }
     }
     
     @ViewBuilder
     public func viewToDisplay() -> some View {
         switch self {
-        case .movies:
+        case .home:
             MoviesView()
         case .movieDetails(let movie):
             if let movie {
                 MovieDetails(movie: movie)
             } else {
-                CommonErrorView(message: "No Movie data found")
+                CommonView(message: "No Movie data found")
             }
         case .movieReviews(let reviews):
             MovieReviews(reviews: reviews)
         case .defaultScreen(let msg):
-            CommonErrorView(message: msg)
+            CommonView(message: msg)
         case .myAccount:
             MyAccountView()
         case .profileScreen1:
@@ -75,7 +79,9 @@ public enum AppRoutes: Routable {
         case .profileScreen2:
             ProfileScreen2()
         case .profileScreen3:
-            CommonErrorView(message: "Profile Screen 3")
+            CommonView(message: "Profile Screen 3")
+        case .help:
+            CommonView(message: "Help Screen")
         }
     }
     
@@ -83,12 +89,33 @@ public enum AppRoutes: Routable {
         switch self {
         case .movieDetails, .defaultScreen:
             return .push
-        case .movies, .myAccount:
+        case .home, .help, .myAccount:
             return .tab
         case .movieReviews:
             return .sheet
         case .profileScreen1, .profileScreen2, .profileScreen3:
             return .push
+        }
+    }
+    
+    public var path: String {
+        switch self {
+        case .home:
+            return "/movies"
+        case .movieDetails:
+            return "/moviedetails"
+        case .movieReviews:
+            return "/reviews"
+        case .myAccount:
+               return "/myaccount"
+        case .profileScreen1:
+            return "/profilescreen1"
+        case .profileScreen2:
+            return "/profilescreen2"
+        case .profileScreen3:
+            return "/profilescreen3"
+        default:
+            return "/commonscreen"
         }
     }
 }
