@@ -11,7 +11,7 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     /// Used to programatically control a navigation stack
     @Published public var stack: [Destination] = [] {
         didSet {
-            currentPath = stack.map({ route in return route.path }).joined()
+            currentPath = stack.map({ route in return route.routeInfo.path }).joined()
             debugPrint("The CurrentPath is \(currentPath)")
         }
     }
@@ -22,7 +22,7 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     /// Used to present a view using a full screen cover
     @Published public var presentingFullScreenCover: Destination?
     /// Used by presented Router instances to dismiss themselves
-    @Published public var isPresented: Binding<Destination?>
+    @Published public var isPresented: Binding<Destination?>?
     public var isPresenting: Bool {
         presentingSheet != nil || presentingFullScreenCover != nil
     }
@@ -32,15 +32,23 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     }
     
     /// Returns the view associated with the specified `Routable`
-    @ViewBuilder public func view(for route: Destination) -> some View {
-        route.viewToDisplay()
+    public func view(for route: Destination) -> some View {
+        route.routeInfo.viewToDisplay()
     }
     
     /// Routes to the specified `Routable`.
     public func routeTo(_ route: Destination) {
+        if route.isLoginRequired {
+            guard route.isUserLoggedIn else {
+                if let loginRoute = route.getLoginRoute() as? Destination {
+                    presentSheet(loginRoute)
+                }
+                return
+            }
+        }
         switch route.navigationType {
         case .tab:
-            selectedTab = route.tabIndex
+            selectedTab = route.routeInfo.tabIndex
         case .push:
             push(route)
         case .sheet:
@@ -78,11 +86,14 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
         if !stack.isEmpty {
             stack.removeLast()
         } else if presentingSheet != nil {
+            presentingSheet?.onDismiss()
             presentingSheet = nil
         } else if presentingFullScreenCover != nil {
+            presentingFullScreenCover?.onDismiss()
             presentingFullScreenCover = nil
         } else {
-            isPresented.wrappedValue = nil
+            presentingSheet?.onDismiss()
+            isPresented?.wrappedValue = nil
         }
     }
     
@@ -115,7 +126,7 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     
     private func push(_ appRoute: Destination) {
         stack.append(appRoute)
-        currentPath.append(appRoute.path)
+        currentPath.append(appRoute.routeInfo.path)
     }
     
     private func presentSheet(_ route: Destination) {

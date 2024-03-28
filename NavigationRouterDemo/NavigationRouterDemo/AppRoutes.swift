@@ -7,8 +7,38 @@
 
 import SwiftUI
 
+class AppRoute: Routable {
+    @AppStorage("login") var loggedIn: Bool = false
+    var isUserLoggedIn: Bool {
+        loggedIn
+    }
+    var routeInfo: AppRouteInfo
+    var navigationType: NavigationType
+    var transition: AnyTransition?
+    var isLoginRequired: Bool = false
+    var onDismiss: (() -> Void)
+    
+    static func == (lhs: AppRoute, rhs: AppRoute) -> Bool {
+        lhs.routeInfo.path == rhs.routeInfo.path
+    }
+    
+    required init(routeInfo: AppRouteInfo, navigationType: NavigationType = .push, isLoginRequired: Bool = false, onDismiss: @escaping () -> Void = {}) {
+        self.routeInfo = routeInfo
+        self.navigationType = navigationType
+        self.isLoginRequired = isLoginRequired
+        self.onDismiss = onDismiss
+    }
+    
+    func getLoginRoute() -> any Routable {
+        AppRoute(routeInfo: .login, navigationType: .sheet) {
+            /// This will be called on dimissing the route
+            print("Dismissed login")
+        }
+    }
+}
+
 /// This file will be used to define all the possible routes in the app and there type of navigation eg. .sheet or .push
-public enum AppRoutes: Routable {
+public enum AppRouteInfo: RouteInfo {
     case home
     case help
     case movieDetails(Movie?)
@@ -18,8 +48,9 @@ public enum AppRoutes: Routable {
     case profileScreen1
     case profileScreen2
     case profileScreen3
+    case login
     
-    public static func initWith(path: String, movie: Movie? = nil) -> AppRoutes? {
+    public static func initWith(path: String, movie: Movie? = nil) -> AppRouteInfo? {
         switch path.lowercased() {
         case "/", "movies":
             return .home
@@ -82,19 +113,10 @@ public enum AppRoutes: Routable {
             CommonView(message: "Profile Screen 3")
         case .help:
             CommonView(message: "Help Screen")
-        }
-    }
-    
-    public var navigationType: NavigationType {
-        switch self {
-        case .movieDetails, .defaultScreen:
-            return .push
-        case .home, .help, .myAccount:
-            return .tab
-        case .movieReviews:
-            return .sheet
-        case .profileScreen1, .profileScreen2, .profileScreen3:
-            return .push
+        case .login:
+            RoutingView(router: Router<AppRoute>(), AppRoute.self) {
+                LoginView()
+            }
         }
     }
     
@@ -114,6 +136,8 @@ public enum AppRoutes: Routable {
             return "/profilescreen2"
         case .profileScreen3:
             return "/profilescreen3"
+        case .login:
+            return "/login"
         default:
             return "/commonscreen"
         }

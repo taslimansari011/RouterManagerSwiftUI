@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MovieReviews: View {
     let reviews: [Review]
-    @EnvironmentObject var router: Router<AppRoutes>
+    @EnvironmentObject var router: Router<AppRoute>
         
     init(reviews: [Review]) {
         self.reviews = reviews

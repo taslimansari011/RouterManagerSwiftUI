@@ -8,32 +8,22 @@
 import SwiftUI
 
 struct MoviesView: View {
-    @EnvironmentObject var router: Router<AppRoutes>
+    @EnvironmentObject var router: Router<AppRoute>
     
     let movies: [Movie] = MoviesDataProvider.buildData()
     var body: some View {
         List(movies, id: \.self) { movie in
             MovieView(movie: movie, showMovieReviews: {
-                router.pushMultiple([.movieDetails(movie), .movieReviews(movie.reviews)])
+                router.pushMultiple([
+                    AppRoute(routeInfo: AppRouteInfo.movieDetails(movie)),
+                    AppRoute(routeInfo: AppRouteInfo.movieReviews(movie.reviews))
+                ])
             })
             .onTapGesture {
-                router.routeTo(.movieDetails(movie))
+                router.routeTo(AppRoute(routeInfo: AppRouteInfo.movieDetails(movie)))
             }
         }
         .listStyle(.plain)
-    }
-    
-    private func openURL(url: URL) {
-        var movieId = 0
-        let queryItems = URLComponents(string: url.absoluteString)?.queryItems
-        if let id = queryItems?.first(where: { $0.name == "id" })?.value, let value = Int(id) {
-            movieId = value
-        }
-        let movie = MoviesDataProvider.moviesWith(id: movieId)
-        let routes = url.pathComponents.compactMap { component in
-            AppRoutes.initWith(path: component, movie: movie)
-        }
-        router.pushMultiple(routes)
     }
 }
 

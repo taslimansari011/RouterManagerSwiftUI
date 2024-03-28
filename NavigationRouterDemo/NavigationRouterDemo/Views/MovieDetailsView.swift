@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MovieDetails: View {
     let movie: Movie
-    @EnvironmentObject var router: Router<AppRoutes>
+    @EnvironmentObject var router: Router<AppRoute>
         
     init(movie: Movie) {
         self.movie = movie
@@ -30,7 +30,7 @@ struct MovieDetails: View {
                 Text(movie.description)
                     .font(.title3)
                 Button {
-                    router.routeTo(.movieReviews(movie.reviews))
+                    router.routeTo(AppRoute(routeInfo: .movieReviews(movie.reviews), navigationType: .sheet))
                 } label: {
                     Text("See All Reviews")
                 }

@@ -33,7 +33,7 @@ public class TabRouter<Destination: Routable>: ObservableObject, TabRoutingProto
     ///   - pathString: pathString of the deeplink description
     public func handleDeeplink(routes: [Destination] = [], pathString: String = "") {
         var internalPath = routes
-        if let tab = routes.first?.tabIndex {
+        if let tab = routes.first?.routeInfo.tabIndex {
             selectedTab = tab
             internalPath.removeFirst()
             router?.pushReplacement(internalPath)

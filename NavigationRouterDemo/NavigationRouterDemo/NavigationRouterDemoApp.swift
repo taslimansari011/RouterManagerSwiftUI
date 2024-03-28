@@ -12,11 +12,7 @@ struct NavigationRouterDemoApp: App {
     @AppStorage("login") var login: Bool = false
     var body: some Scene {
         WindowGroup {
-            if login {
-                AppTabbarView()
-            } else {
-                LoginView()
-            }
+            AppTabbarView()
         }
     }
 }

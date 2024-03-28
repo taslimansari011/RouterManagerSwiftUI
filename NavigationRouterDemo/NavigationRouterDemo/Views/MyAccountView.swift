@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyAccountView: View {
     @AppStorage("login") var login: Bool = false
-    @EnvironmentObject var router: Router<AppRoutes>
+    @EnvironmentObject var router: Router<AppRoute>
     let listData = ["Profile", "Saved List", "My Reviews", "Logout"]
     var body: some View {
         List(listData, id: \.self) { data in
@@ -20,9 +20,9 @@ struct MyAccountView: View {
             }
             .onTapGesture {
                 if data == "Profile" {
-                    router.routeTo(.profileScreen1)
+                    router.routeTo(AppRoute(routeInfo: AppRouteInfo.profileScreen1, isLoginRequired: true))
                 } else {
-                    router.routeTo(.defaultScreen(message: data))
+                    router.routeTo(AppRoute(routeInfo: AppRouteInfo.defaultScreen(message: data)))
                 }
             }
         }
@@ -36,20 +36,20 @@ struct MyAccountView: View {
 }
 
 struct ProfileScreen1: View {
-    @EnvironmentObject var router: Router<AppRoutes>
+    @EnvironmentObject var router: Router<AppRoute>
     var body: some View {
         Button("Goto Screen 2") {
-            router.routeTo(.profileScreen2)
+            router.routeTo(AppRoute(routeInfo: AppRouteInfo.profileScreen2))
         }
         .navigationTitle("ProfileScreen1")
     }
 }
 
 struct ProfileScreen2: View {
-    @EnvironmentObject var router: Router<AppRoutes>
+    @EnvironmentObject var router: Router<AppRoute>
     var body: some View {
         Button("Goto Screen 3") {
-            router.routeTo(.profileScreen3)
+            router.routeTo(AppRoute(routeInfo: AppRouteInfo.profileScreen3))
         }
         .navigationTitle("ProfileScreen2")
     }

@@ -9,10 +9,21 @@ import SwiftUI
 
 struct LoginView: View {
     @AppStorage("login") var login: Bool = false
+    @EnvironmentObject var router: Router<AppRoute>
+
     var body: some View {
-        Button("Login") {
-            login = true
+        ZStack {
+            Color.yellow
+            VStack {
+                Button("Login") {
+                    router.routeTo(AppRoute(routeInfo: .login, navigationType: .sheet))
+                }
+                Button("Dismiss") {
+                    router.dismiss()
+                }
+            }
         }
+        .navigationTitle("Login")
     }
 }
 
@@ -46,25 +57,25 @@ enum Tab: Int, CaseIterable {
 
 struct AppTabbarView: View {
     @State var selectedTab = 0
-    @ObservedObject var tabRouter: TabRouter = TabRouter<AppRoutes>([
+    @ObservedObject var tabRouter: TabRouter = TabRouter<AppRoute>([
         Router(),Router(),Router()
     ])
     
     var body: some View {
         TabView(selection: $tabRouter.selectedTab) {
-            RoutingView(router: tabRouter.navigationRouters[0], AppRoutes.self) {
+            RoutingView(router: tabRouter.navigationRouters[0], AppRoute.self) {
                 MoviesView()
             }
             .tabItem { Label(Tab.home.title, systemImage: Tab.home.systemImage) }
             .tag(0)
             
-            RoutingView(router: tabRouter.navigationRouters[1], AppRoutes.self) {
+            RoutingView(router: tabRouter.navigationRouters[1], AppRoute.self) {
                 Text("Help")
             }
             .tabItem { Label(Tab.help.title, systemImage: Tab.help.systemImage) }
             .tag(1)
             
-            RoutingView(router: tabRouter.navigationRouters[2], AppRoutes.self) {
+            RoutingView(router: tabRouter.navigationRouters[2], AppRoute.self) {
                 MyAccountView()
             }
             .tabItem { Label(Tab.myAccount.title, systemImage: Tab.myAccount.systemImage) }
@@ -81,12 +92,18 @@ struct AppTabbarView: View {
         let components = url.pathComponents.filter { component in
             component != "/"
         }
+        guard !components.isEmpty else {
+            tabRouter.routeToHome()
+            return
+        }
         let routes =  components.compactMap { component in
-            let route = AppRoutes.initWith(path: component)
-            if route == nil {
+            if let routeInfo = AppRouteInfo.initWith(path: component) {
+                let route = AppRoute(routeInfo: routeInfo, navigationType: .sheet)
+                return route
+            } else {
                 isValidPath = false
+                return nil
             }
-            return route
         }
         if isValidPath {
             tabRouter.handleDeeplink(routes: routes, pathString: url.path())

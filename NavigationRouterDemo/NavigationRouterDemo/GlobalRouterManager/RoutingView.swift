@@ -24,10 +24,10 @@ public struct RoutingView<Content: View, Destination: Routable>: View {
                 }
         }
         .sheet(item: $router.presentingSheet) { route in
-                router.view(for: route)
+            router.view(for: route)
         }
         .fullScreenCover(item: $router.presentingFullScreenCover) { route in
-                router.view(for: route)
+            router.view(for: route)
         }
         .environmentObject(router)
     }

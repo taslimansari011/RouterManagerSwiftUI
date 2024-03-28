@@ -14,12 +14,24 @@ public enum NavigationType {
     case fullScreenCover
 }
 
-public protocol Routable: Hashable, Identifiable {
+public protocol RouteInfo {
     associatedtype ViewType: View
-    var navigationType: NavigationType { get }
     var tabIndex: Int? { get }
     var path: String { get }
     func viewToDisplay() -> ViewType
+}
+
+public protocol Routable: Hashable, Identifiable {
+    associatedtype T: RouteInfo
+    var routeInfo: T { get set }
+    var navigationType: NavigationType { get set }
+    var transition: AnyTransition? { get set }
+    var isLoginRequired: Bool { get }
+    var isUserLoggedIn: Bool { get }
+    var onDismiss: (() -> Void) { get set }
+    func getLoginRoute() -> any Routable
+    
+    init(routeInfo: AppRouteInfo, navigationType: NavigationType, isLoginRequired: Bool, onDismiss: @escaping () -> Void)
 }
 
 extension Routable {
