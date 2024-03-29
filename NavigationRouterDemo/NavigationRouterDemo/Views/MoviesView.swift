@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MoviesView: View {
-    @EnvironmentObject var router: Router<AppRoute>
+    @StateObject var router: Router<AppRoute>
     
     let movies: [Movie] = MoviesDataProvider.buildData()
     var body: some View {
@@ -29,7 +29,7 @@ struct MoviesView: View {
 
 struct MoviesView_Previews: PreviewProvider {
     static var previews: some View {
-        MoviesView()
+        MoviesView(router: Router())
             .navigationTitle("Movies")
     }
 }

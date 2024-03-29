@@ -27,6 +27,8 @@ public protocol RoutingProtocols: AnyObject {
     func popToRoot()
     /// Go back to the previous view
     func dismiss()
+    /// Dismiss the sheet
+    func dismissSheet()
     /// Check if stack can pop a view
     /// - Returns: can pop
     func canPop() -> Bool

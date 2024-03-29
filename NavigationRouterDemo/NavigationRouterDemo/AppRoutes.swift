@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-class AppRoute: Routable {
+final class AppRoute: Routable {
+    
     @AppStorage("login") var loggedIn: Bool = false
     var isUserLoggedIn: Bool {
         loggedIn
@@ -33,6 +34,42 @@ class AppRoute: Routable {
         AppRoute(routeInfo: .login, navigationType: .sheet) {
             /// This will be called on dimissing the route
             print("Dismissed login")
+        }
+    }
+    
+    @ViewBuilder
+    func viewToDisplay(router: Router<AppRoute>, _ navigtionType: NavigationType) -> some View {
+        switch self.routeInfo {
+        case .home:
+            MoviesView(router: router)
+        case .movieDetails(let movie):
+            if let movie {
+                MovieDetails(movie: movie, router: router)
+            } else {
+                CommonView(message: "No Movie data found")
+            }
+        case .movieReviews(let reviews):
+            MovieReviews(reviews: reviews)
+        case .defaultScreen(let msg):
+            CommonView(message: msg)
+        case .myAccount:
+            MyAccountView(router: router)
+        case .profileScreen1:
+            ProfileScreen1(router: router)
+        case .profileScreen2:
+            ProfileScreen2(router: router)
+        case .profileScreen3:
+            CommonView(message: "Profile Screen 3")
+        case .help:
+            CommonView(message: "Help Screen")
+        case .login:
+            if navigtionType == .push {
+                AnyView(LoginView(router: router))
+            } else {
+                AnyView(RoutingView(router: router, AppRoute.self) {
+                    LoginView(router: router)
+                })
+            }
         }
     }
 }
@@ -61,7 +98,7 @@ public enum AppRouteInfo: RouteInfo {
         case "reviews":
             return .movieReviews(movie?.reviews ?? [])
         case "myaccount":
-               return .myAccount
+            return .myAccount
         case "commonscreen":
             return .defaultScreen(message: "")
         case "profilescreen1":
@@ -88,38 +125,6 @@ public enum AppRouteInfo: RouteInfo {
         }
     }
     
-    @ViewBuilder
-    public func viewToDisplay() -> some View {
-        switch self {
-        case .home:
-            MoviesView()
-        case .movieDetails(let movie):
-            if let movie {
-                MovieDetails(movie: movie)
-            } else {
-                CommonView(message: "No Movie data found")
-            }
-        case .movieReviews(let reviews):
-            MovieReviews(reviews: reviews)
-        case .defaultScreen(let msg):
-            CommonView(message: msg)
-        case .myAccount:
-            MyAccountView()
-        case .profileScreen1:
-            ProfileScreen1()
-        case .profileScreen2:
-            ProfileScreen2()
-        case .profileScreen3:
-            CommonView(message: "Profile Screen 3")
-        case .help:
-            CommonView(message: "Help Screen")
-        case .login:
-            RoutingView(router: Router<AppRoute>(), AppRoute.self) {
-                LoginView()
-            }
-        }
-    }
-    
     public var path: String {
         switch self {
         case .home:
@@ -129,7 +134,7 @@ public enum AppRouteInfo: RouteInfo {
         case .movieReviews:
             return "/reviews"
         case .myAccount:
-               return "/myaccount"
+            return "/myaccount"
         case .profileScreen1:
             return "/profilescreen1"
         case .profileScreen2:

@@ -10,13 +10,13 @@
 		7C2EB3972BA2F42000D20600 /* AppRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2EB3962BA2F42000D20600 /* AppRoutes.swift */; };
 		7C3A7A452BA98B43004AD2DE /* CommonErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A7A442BA98B43004AD2DE /* CommonErrorView.swift */; };
 		7C3A7A472BA9A427004AD2DE /* MyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A7A462BA9A427004AD2DE /* MyAccountView.swift */; };
-		7CA1C6DC2BAC07D50033F1F3 /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1C6D82BAC07D50033F1F3 /* RoutingView.swift */; };
-		7CA1C6DD2BAC07D50033F1F3 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1C6D92BAC07D50033F1F3 /* Routable.swift */; };
-		7CA1C6DE2BAC07D50033F1F3 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1C6DA2BAC07D50033F1F3 /* Router.swift */; };
-		7CA1C6DF2BAC07D50033F1F3 /* RoutingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1C6DB2BAC07D50033F1F3 /* RoutingProtocols.swift */; };
-		7CA1C6E42BADA0850033F1F3 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1C6E32BADA0850033F1F3 /* Array+Extension.swift */; };
-		7CA1C6E62BADA13A0033F1F3 /* TabRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1C6E52BADA13A0033F1F3 /* TabRouter.swift */; };
-		7CA1C6E92BADA1F50033F1F3 /* TabRoutingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1C6E82BADA1F50033F1F3 /* TabRoutingProtocols.swift */; };
+		7C5A7A432BB6DAAA00ECAD12 /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A3A2BB6DAAA00ECAD12 /* RoutingView.swift */; };
+		7C5A7A442BB6DAAA00ECAD12 /* TabRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A3B2BB6DAAA00ECAD12 /* TabRouter.swift */; };
+		7C5A7A452BB6DAAA00ECAD12 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A3D2BB6DAAA00ECAD12 /* Array+Extension.swift */; };
+		7C5A7A462BB6DAAA00ECAD12 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A3E2BB6DAAA00ECAD12 /* Router.swift */; };
+		7C5A7A472BB6DAAA00ECAD12 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A402BB6DAAA00ECAD12 /* Routable.swift */; };
+		7C5A7A482BB6DAAA00ECAD12 /* TabRoutingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A412BB6DAAA00ECAD12 /* TabRoutingProtocols.swift */; };
+		7C5A7A492BB6DAAA00ECAD12 /* RoutingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A422BB6DAAA00ECAD12 /* RoutingProtocols.swift */; };
 		7CF79B392B999DB3005289CB /* NavigationRouterDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF79B382B999DB3005289CB /* NavigationRouterDemoApp.swift */; };
 		7CF79B3B2B999DB3005289CB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF79B3A2B999DB3005289CB /* ContentView.swift */; };
 		7CF79B3D2B999DB6005289CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CF79B3C2B999DB6005289CB /* Assets.xcassets */; };
@@ -47,13 +47,13 @@
 		7C2EB4002BA9671000D20600 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7C3A7A442BA98B43004AD2DE /* CommonErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonErrorView.swift; sourceTree = "<group>"; };
 		7C3A7A462BA9A427004AD2DE /* MyAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountView.swift; sourceTree = "<group>"; };
-		7CA1C6D82BAC07D50033F1F3 /* RoutingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
-		7CA1C6D92BAC07D50033F1F3 /* Routable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
-		7CA1C6DA2BAC07D50033F1F3 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		7CA1C6DB2BAC07D50033F1F3 /* RoutingProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingProtocols.swift; sourceTree = "<group>"; };
-		7CA1C6E32BADA0850033F1F3 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
-		7CA1C6E52BADA13A0033F1F3 /* TabRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRouter.swift; sourceTree = "<group>"; };
-		7CA1C6E82BADA1F50033F1F3 /* TabRoutingProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRoutingProtocols.swift; sourceTree = "<group>"; };
+		7C5A7A3A2BB6DAAA00ECAD12 /* RoutingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
+		7C5A7A3B2BB6DAAA00ECAD12 /* TabRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabRouter.swift; sourceTree = "<group>"; };
+		7C5A7A3D2BB6DAAA00ECAD12 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		7C5A7A3E2BB6DAAA00ECAD12 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		7C5A7A402BB6DAAA00ECAD12 /* Routable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
+		7C5A7A412BB6DAAA00ECAD12 /* TabRoutingProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabRoutingProtocols.swift; sourceTree = "<group>"; };
+		7C5A7A422BB6DAAA00ECAD12 /* RoutingProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingProtocols.swift; sourceTree = "<group>"; };
 		7CF79B352B999DB3005289CB /* NavigationRouterDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavigationRouterDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CF79B382B999DB3005289CB /* NavigationRouterDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouterDemoApp.swift; sourceTree = "<group>"; };
 		7CF79B3A2B999DB3005289CB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,32 +93,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7CA1C6D72BAC07D50033F1F3 /* GlobalRouterManager */ = {
+		7C5A7A392BB6DAAA00ECAD12 /* GlobalRouterManager */ = {
 			isa = PBXGroup;
 			children = (
-				7CA1C6E72BADA1DD0033F1F3 /* Protocols */,
-				7CA1C6E22BADA0760033F1F3 /* Extensions */,
-				7CA1C6D82BAC07D50033F1F3 /* RoutingView.swift */,
-				7CA1C6D92BAC07D50033F1F3 /* Routable.swift */,
-				7CA1C6DA2BAC07D50033F1F3 /* Router.swift */,
-				7CA1C6E52BADA13A0033F1F3 /* TabRouter.swift */,
+				7C5A7A3A2BB6DAAA00ECAD12 /* RoutingView.swift */,
+				7C5A7A3B2BB6DAAA00ECAD12 /* TabRouter.swift */,
+				7C5A7A3C2BB6DAAA00ECAD12 /* Extensions */,
+				7C5A7A3E2BB6DAAA00ECAD12 /* Router.swift */,
+				7C5A7A3F2BB6DAAA00ECAD12 /* Protocols */,
 			);
 			path = GlobalRouterManager;
 			sourceTree = "<group>";
 		};
-		7CA1C6E22BADA0760033F1F3 /* Extensions */ = {
+		7C5A7A3C2BB6DAAA00ECAD12 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7CA1C6E32BADA0850033F1F3 /* Array+Extension.swift */,
+				7C5A7A3D2BB6DAAA00ECAD12 /* Array+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		7CA1C6E72BADA1DD0033F1F3 /* Protocols */ = {
+		7C5A7A3F2BB6DAAA00ECAD12 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				7CA1C6DB2BAC07D50033F1F3 /* RoutingProtocols.swift */,
-				7CA1C6E82BADA1F50033F1F3 /* TabRoutingProtocols.swift */,
+				7C5A7A402BB6DAAA00ECAD12 /* Routable.swift */,
+				7C5A7A412BB6DAAA00ECAD12 /* TabRoutingProtocols.swift */,
+				7C5A7A422BB6DAAA00ECAD12 /* RoutingProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -144,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				7C2EB4002BA9671000D20600 /* Info.plist */,
-				7CA1C6D72BAC07D50033F1F3 /* GlobalRouterManager */,
+				7C5A7A392BB6DAAA00ECAD12 /* GlobalRouterManager */,
 				7C2EB3A02BA2F95700D20600 /* OldCode */,
 				7CF79B4B2B99A102005289CB /* DataModels */,
 				7CF79B482B999F1A005289CB /* Views */,
@@ -257,22 +257,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C5A7A482BB6DAAA00ECAD12 /* TabRoutingProtocols.swift in Sources */,
 				7CF79B472B999DDA005289CB /* RouterViewOld.swift in Sources */,
 				7CF79B4A2B999F2A005289CB /* MoviesView.swift in Sources */,
-				7CA1C6DD2BAC07D50033F1F3 /* Routable.swift in Sources */,
 				7C3A7A452BA98B43004AD2DE /* CommonErrorView.swift in Sources */,
-				7CA1C6E92BADA1F50033F1F3 /* TabRoutingProtocols.swift in Sources */,
-				7CA1C6DC2BAC07D50033F1F3 /* RoutingView.swift in Sources */,
+				7C5A7A432BB6DAAA00ECAD12 /* RoutingView.swift in Sources */,
 				7C3A7A472BA9A427004AD2DE /* MyAccountView.swift in Sources */,
-				7CA1C6DF2BAC07D50033F1F3 /* RoutingProtocols.swift in Sources */,
-				7CA1C6E42BADA0850033F1F3 /* Array+Extension.swift in Sources */,
 				7CF79B532B99A167005289CB /* MovieDetailsView.swift in Sources */,
-				7CA1C6E62BADA13A0033F1F3 /* TabRouter.swift in Sources */,
 				7CF79B4D2B99A11D005289CB /* MovieModel.swift in Sources */,
+				7C5A7A472BB6DAAA00ECAD12 /* Routable.swift in Sources */,
+				7C5A7A462BB6DAAA00ECAD12 /* Router.swift in Sources */,
 				7CF79B512B99A159005289CB /* ReviewsView.swift in Sources */,
 				7C2EB3972BA2F42000D20600 /* AppRoutes.swift in Sources */,
-				7CA1C6DE2BAC07D50033F1F3 /* Router.swift in Sources */,
+				7C5A7A492BB6DAAA00ECAD12 /* RoutingProtocols.swift in Sources */,
 				7CF79B3B2B999DB3005289CB /* ContentView.swift in Sources */,
+				7C5A7A442BB6DAAA00ECAD12 /* TabRouter.swift in Sources */,
+				7C5A7A452BB6DAAA00ECAD12 /* Array+Extension.swift in Sources */,
 				7CF79B392B999DB3005289CB /* NavigationRouterDemoApp.swift in Sources */,
 				7CF79B4F2B99A12C005289CB /* ReviewModel.swift in Sources */,
 			);

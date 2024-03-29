@@ -9,17 +9,22 @@ import SwiftUI
 
 struct LoginView: View {
     @AppStorage("login") var login: Bool = false
-    @EnvironmentObject var router: Router<AppRoute>
+    @StateObject var router: Router<AppRoute>
 
     var body: some View {
         ZStack {
             Color.yellow
             VStack {
                 Button("Login") {
-                    router.routeTo(AppRoute(routeInfo: .login, navigationType: .sheet))
+                    router.routeTo(AppRoute(routeInfo: .login, navigationType: .fullScreenCover, onDismiss: {
+                        print("Dismissinnnnnng")
+                    }))
+                }
+                Button("Push") {
+                    router.routeTo(AppRoute(routeInfo: .login))
                 }
                 Button("Dismiss") {
-                    router.dismiss()
+                    router.dismissSheet()
                 }
             }
         }
@@ -64,19 +69,19 @@ struct AppTabbarView: View {
     var body: some View {
         TabView(selection: $tabRouter.selectedTab) {
             RoutingView(router: tabRouter.navigationRouters[0], AppRoute.self) {
-                MoviesView()
+                MoviesView(router: tabRouter.navigationRouters[0])
             }
             .tabItem { Label(Tab.home.title, systemImage: Tab.home.systemImage) }
             .tag(0)
             
             RoutingView(router: tabRouter.navigationRouters[1], AppRoute.self) {
-                Text("Help")
+                ProfileScreen1(router: tabRouter.navigationRouters[1])
             }
             .tabItem { Label(Tab.help.title, systemImage: Tab.help.systemImage) }
             .tag(1)
-            
+
             RoutingView(router: tabRouter.navigationRouters[2], AppRoute.self) {
-                MyAccountView()
+                MyAccountView(router: tabRouter.navigationRouters[2])
             }
             .tabItem { Label(Tab.myAccount.title, systemImage: Tab.myAccount.systemImage) }
             .tag(2)
@@ -98,7 +103,7 @@ struct AppTabbarView: View {
         }
         let routes =  components.compactMap { component in
             if let routeInfo = AppRouteInfo.initWith(path: component) {
-                let route = AppRoute(routeInfo: routeInfo, navigationType: .sheet)
+                let route = AppRoute(routeInfo: routeInfo)
                 return route
             } else {
                 isValidPath = false

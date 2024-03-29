@@ -12,7 +12,6 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     @Published public var stack: [Destination] = [] {
         didSet {
             currentPath = stack.map({ route in return route.routeInfo.path }).joined()
-            debugPrint("The CurrentPath is \(currentPath)")
         }
     }
     public var currentPath: String = ""
@@ -33,7 +32,8 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     
     /// Returns the view associated with the specified `Routable`
     public func view(for route: Destination) -> some View {
-        route.routeInfo.viewToDisplay()
+        let router = router(routeType: route.navigationType)
+        return route.viewToDisplay(router: router, route.navigationType)
     }
     
     /// Routes to the specified `Routable`.
@@ -85,16 +85,19 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     public func dismiss() {
         if !stack.isEmpty {
             stack.removeLast()
-        } else if presentingSheet != nil {
-            presentingSheet?.onDismiss()
-            presentingSheet = nil
-        } else if presentingFullScreenCover != nil {
-            presentingFullScreenCover?.onDismiss()
-            presentingFullScreenCover = nil
+        } else if let sheet = isPresented?.wrappedValue {
+            sheet.onDismiss()
+            isPresented?.wrappedValue = nil
         } else {
             presentingSheet?.onDismiss()
             isPresented?.wrappedValue = nil
         }
+    }
+    
+    /// Dismiss the sheet
+    public func dismissSheet() {
+        isPresented?.wrappedValue?.onDismiss()
+        isPresented?.wrappedValue = nil
     }
     
     /// Check if stack can pop a view

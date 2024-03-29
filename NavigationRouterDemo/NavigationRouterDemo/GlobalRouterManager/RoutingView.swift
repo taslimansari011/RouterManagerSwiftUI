@@ -13,7 +13,7 @@ public struct RoutingView<Content: View, Destination: Routable>: View {
 
     public init(router: Router<Destination>, _ routeType: Destination.Type, @ViewBuilder content: @escaping () -> Content) {
         self.router = router
-        rootContent = content
+        self.rootContent = content
     }
     
     public var body: some View {
@@ -29,6 +29,5 @@ public struct RoutingView<Content: View, Destination: Routable>: View {
         .fullScreenCover(item: $router.presentingFullScreenCover) { route in
             router.view(for: route)
         }
-        .environmentObject(router)
     }
 }

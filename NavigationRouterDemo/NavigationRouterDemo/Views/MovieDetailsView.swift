@@ -9,11 +9,7 @@ import SwiftUI
 
 struct MovieDetails: View {
     let movie: Movie
-    @EnvironmentObject var router: Router<AppRoute>
-        
-    init(movie: Movie) {
-        self.movie = movie
-    }
+    @StateObject var router: Router<AppRoute>
     
     var body: some View {
         VStack {
@@ -46,7 +42,7 @@ struct MovieDetails: View {
 struct MovieDetails_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            MovieDetails(movie: MoviesDataProvider.buildData().first!)
+            MovieDetails(movie: MoviesDataProvider.buildData().first!, router: Router<AppRoute>())
         }
     }
 }
