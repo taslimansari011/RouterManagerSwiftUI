@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MovieReviews: View {
     let reviews: [Review]
-    @EnvironmentObject var router: Router<AppRoute>
         
     init(reviews: [Review]) {
         self.reviews = reviews
@@ -25,13 +24,6 @@ struct MovieReviews: View {
             .listStyle(.plain)
             .navigationTitle("Reviews")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                Image(systemName: "house")
-                    .foregroundColor(.orange)
-                    .onTapGesture {
-                        router.popToRoot()
-                    }
-            }
         }
     }
 }

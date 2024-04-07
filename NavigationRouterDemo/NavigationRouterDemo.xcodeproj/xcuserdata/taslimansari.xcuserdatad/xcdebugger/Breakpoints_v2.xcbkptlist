@@ -7,24 +7,72 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7567F366-1F73-44E0-9DB4-A4CD94A85BAE"
+            uuid = "E90FD054-DCBC-4B1B-B369-F801E006429B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NavigationRouterDemo/AppRoutes.swift"
+            filePath = "NavigationRouterDemo/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "viewToDisplay(router:_:)"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "openURL(url:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E90FD054-DCBC-4B1B-B369-F801E006429B - 73d89ca65a5ac59e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NavigationRouterDemo.AppTabbarView.openURL(url: Foundation.URL) -&gt; ()"
+                  moduleName = "NavigationRouterDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taslimansari/RouterManagerSwiftUI/NavigationRouterDemo/NavigationRouterDemo/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "507">
+               </Location>
+               <Location
+                  uuid = "E90FD054-DCBC-4B1B-B369-F801E006429B - d2a9110f21624ca"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.String) -&gt; Swift.Optional&lt;NavigationRouterDemo.AppRoute&gt; in NavigationRouterDemo.AppTabbarView.openURL(url: Foundation.URL) -&gt; ()"
+                  moduleName = "NavigationRouterDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taslimansari/RouterManagerSwiftUI/NavigationRouterDemo/NavigationRouterDemo/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "460">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0661B0BF-DD76-485D-B533-C16E4A7C3F7F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NavigationRouterDemo/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "openURL(url:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "33DE513E-41FA-4EE7-A292-351C362A0DA7"
-            shouldBeEnabled = "No"
+            uuid = "0A80E181-D50E-43CC-9F7C-7C0D57484AC2"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NavigationRouterDemo/GlobalRouterManager/TabRouter.swift"
@@ -33,38 +81,6 @@
             startingLineNumber = "35"
             endingLineNumber = "35"
             landmarkName = "handleDeeplink(routes:pathString:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E483A66D-4B4D-4B4D-B9CC-52CE6CA9CCB7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NavigationRouterDemo/GlobalRouterManager/Router.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "handleDeeplink(routes:isPathPresentInThisStack:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B222DD68-B772-4128-AFDF-E430F40729ED"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NavigationRouterDemo/GlobalRouterManager/Router.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "routeTo(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

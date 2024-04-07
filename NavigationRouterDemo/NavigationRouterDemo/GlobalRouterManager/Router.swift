@@ -40,7 +40,12 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     public func routeTo(_ route: Destination) {
         if route.isLoginRequired {
             guard route.isUserLoggedIn else {
-                if let loginRoute = route.getLoginRoute() as? Destination {
+                if let loginRoute = route.getLoginRoute(onDismiss: { [weak self] in
+                    if route.isUserLoggedIn {
+                        print("Dismissed login from onDismiss")
+                        self?.routeTo(route)
+                    }
+                }) as? Destination {
                     presentSheet(loginRoute)
                 }
                 return
@@ -86,17 +91,17 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
         if !stack.isEmpty {
             stack.removeLast()
         } else if let sheet = isPresented?.wrappedValue {
-            sheet.onDismiss()
+            sheet.onDismiss?()
             isPresented?.wrappedValue = nil
         } else {
-            presentingSheet?.onDismiss()
+            presentingSheet?.onDismiss?()
             isPresented?.wrappedValue = nil
         }
     }
     
     /// Dismiss the sheet
     public func dismissSheet() {
-        isPresented?.wrappedValue?.onDismiss()
+        isPresented?.wrappedValue?.onDismiss?()
         isPresented?.wrappedValue = nil
     }
     

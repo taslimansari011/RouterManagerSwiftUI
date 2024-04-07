@@ -10,7 +10,7 @@ import SwiftUI
 struct MyAccountView: View {
     @AppStorage("login") var login: Bool = false
     @StateObject var router: Router<AppRoute>
-    let listData = ["Profile", "Saved List", "My Reviews", "Logout"]
+    let listData = ["Profile", "Saved List", "My Reviews", "Write to us"]
     var body: some View {
         List(listData, id: \.self) { data in
             HStack {
@@ -28,35 +28,45 @@ struct MyAccountView: View {
         }
         .navigationTitle("My Account")
         .toolbar {
-            Button("Logout") {
-                login = false
+            if login {
+                Button("Logout") {
+                    login = false
+                }
             }
         }
-    }
-}
-
-struct ProfileScreen1: View {
-    @StateObject var router: Router<AppRoute>
-    var body: some View {
-        Button("Goto Screen 2") {
-            router.routeTo(AppRoute(routeInfo: AppRouteInfo.profileScreen2))
-        }
-        .navigationTitle("ProfileScreen1")
-    }
-}
-
-struct ProfileScreen2: View {
-    @StateObject var router: Router<AppRoute>
-    var body: some View {
-        Button("Goto Screen 3") {
-            router.routeTo(AppRoute(routeInfo: AppRouteInfo.profileScreen3))
-        }
-        .navigationTitle("ProfileScreen2")
     }
 }
 
 struct MyAccountView_Previews: PreviewProvider {
     static var previews: some View {
         MyAccountView(router: Router<AppRoute>())
+    }
+}
+
+// MARK: - ProfileScreen1
+
+struct ProfileScreen1: View {
+    @StateObject var router: Router<AppRoute>
+    var body: some View {
+        Button("Goto Screen 2") {
+            router.routeTo(AppRoute(routeInfo: AppRouteInfo.profileScreen2(data: "No data yet")))
+        }
+        .navigationTitle("ProfileScreen1")
+    }
+}
+
+// MARK: - ProfileScreen2
+
+struct ProfileScreen2: View {
+    @StateObject var router: Router<AppRoute>
+    let queryData: String
+    var body: some View {
+        VStack {        
+            Text("Query Data: \(queryData)").bold()
+            Button("Goto Screen 3") {
+                router.routeTo(AppRoute(routeInfo: AppRouteInfo.profileScreen3))
+            }
+            .navigationTitle("Profile Screen 2")
+        }
     }
 }

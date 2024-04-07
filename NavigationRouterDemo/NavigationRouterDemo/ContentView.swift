@@ -16,6 +16,10 @@ struct LoginView: View {
             Color.yellow
             VStack {
                 Button("Login") {
+                    login = true
+                    router.dismiss()
+                }
+                Button("Present") {
                     router.routeTo(AppRoute(routeInfo: .login, navigationType: .fullScreenCover, onDismiss: {
                         print("Dismissinnnnnng")
                     }))
@@ -102,7 +106,8 @@ struct AppTabbarView: View {
             return
         }
         let routes =  components.compactMap { component in
-            if let routeInfo = AppRouteInfo.initWith(path: component) {
+            let queryData = URLComponents(string: url.absoluteString)?.queryItems?.first?.value
+            if let routeInfo = AppRouteInfo(path: component, data: queryData) {
                 let route = AppRoute(routeInfo: routeInfo)
                 return route
             } else {

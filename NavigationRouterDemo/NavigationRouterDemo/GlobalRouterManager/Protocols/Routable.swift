@@ -24,18 +24,20 @@ public protocol Routable: Hashable, Identifiable {
     associatedtype T: RouteInfo
     var routeInfo: T { get set }
     var navigationType: NavigationType { get set }
-    var transition: AnyTransition? { get set }
     var isLoginRequired: Bool { get }
     var isUserLoggedIn: Bool { get }
-    var onDismiss: (() -> Void) { get set }
-    func getLoginRoute() -> any Routable
+    var queryData: Any? { get set }
+    var onDismiss: (() -> Void)? { get set }
+    func getLoginRoute(onDismiss: (() -> Void)?) -> any Routable
     func viewToDisplay(router: Router<Self>, _ navigtionType: NavigationType) -> ViewType
     
-    init(routeInfo: T, navigationType: NavigationType, isLoginRequired: Bool, onDismiss: @escaping () -> Void)
+    init(routeInfo: T, navigationType: NavigationType, isLoginRequired: Bool, queryData: Any, onDismiss: (() -> Void)?)
 }
 
 extension Routable {
     public var id: Self { self }
+    var isLoginRequired: Bool { false }
+    var isUserLoggedIn: Bool { true }
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
