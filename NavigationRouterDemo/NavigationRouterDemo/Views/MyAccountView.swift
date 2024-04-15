@@ -20,7 +20,7 @@ struct MyAccountView: View {
             }
             .onTapGesture {
                 if data == "Profile" {
-                    router.routeTo(AppRoute(routeInfo: AppRouteInfo.profileScreen1, isLoginRequired: true))
+                    router.routeTo(AppRoute(routeInfo: AppRouteInfo.profileScreen1))
                 } else {
                     router.routeTo(AppRoute(routeInfo: AppRouteInfo.defaultScreen(message: data)))
                 }

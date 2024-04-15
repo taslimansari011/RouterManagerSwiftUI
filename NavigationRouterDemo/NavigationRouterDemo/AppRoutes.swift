@@ -9,29 +9,24 @@ import SwiftUI
 
 final class AppRoute: Routable {
     @AppStorage("login") var loggedIn: Bool = false
-    var isUserLoggedIn: Bool {
-        loggedIn
-    }
     var queryData: Any?
     var routeInfo: AppRouteInfo
     var navigationType: NavigationType
     var transition: AnyTransition?
-    var isLoginRequired: Bool = false
-    var onDismiss: (() -> Void)?
+    var onDismiss: ((Bool) -> Void)?
     
     static func == (lhs: AppRoute, rhs: AppRoute) -> Bool {
         lhs.routeInfo.path == rhs.routeInfo.path
     }
     
-    required init(routeInfo: AppRouteInfo, navigationType: NavigationType = .push, isLoginRequired: Bool = false, queryData: Any = "", onDismiss: (() -> Void)? = nil) {
+    required init(routeInfo: AppRouteInfo, navigationType: NavigationType = .push, queryData: Any = "", onDismiss: ((Bool) -> Void)? = nil) {
         self.routeInfo = routeInfo
         self.navigationType = navigationType
-        self.isLoginRequired = isLoginRequired
         self.onDismiss = onDismiss
         self.queryData = queryData
     }
     
-    func getLoginRoute(onDismiss: (() -> Void)? = nil) -> any Routable {
+    func getLoginRoute(onDismiss: Callback? = nil) -> any Routable {
         AppRoute(routeInfo: .login, navigationType: .sheet, onDismiss: onDismiss)
     }
     
@@ -75,6 +70,19 @@ final class AppRoute: Routable {
                     LoginView(router: router)
                 })
             }
+        }
+    }
+    
+    func isRouteValid(onDismiss: Callback?) -> (any Routable)? {
+        switch routeInfo {
+        case .profileScreen1, .profileScreen2, .profileScreen3:
+            if loggedIn {
+                return nil
+            } else {
+                return getLoginRoute(onDismiss: onDismiss)
+            }
+        default:
+            return nil
         }
     }
 }

@@ -17,12 +17,10 @@ struct LoginView: View {
             VStack {
                 Button("Login") {
                     login = true
-                    router.dismiss()
+                    router.dismissValidator(login)
                 }
                 Button("Present") {
-                    router.routeTo(AppRoute(routeInfo: .login, navigationType: .fullScreenCover, onDismiss: {
-                        print("Dismissinnnnnng")
-                    }))
+                    router.routeTo(AppRoute(routeInfo: .login, navigationType: .fullScreenCover))
                 }
                 Button("Push") {
                     router.routeTo(AppRoute(routeInfo: .login))
@@ -128,10 +126,3 @@ struct ContentView_Previews: PreviewProvider {
         AppTabbarView()
     }
 }
-
-//var movieId = 0
-//let queryItems = URLComponents(string: url.absoluteString)?.queryItems
-//if let id = queryItems?.first(where: { $0.name == "id" })?.value, let value = Int(id) {
-//    movieId = value
-//}
-//let movie = MoviesDataProvider.moviesWith(id: movieId)
