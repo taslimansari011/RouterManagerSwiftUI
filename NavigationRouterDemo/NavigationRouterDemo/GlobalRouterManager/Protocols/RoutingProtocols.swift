@@ -27,6 +27,9 @@ public protocol RoutingProtocols: AnyObject {
     func popToRoot()
     /// Go back to the previous view
     func dismiss()
+    /// Dismiss sheet and call the completion handler or validation block if any
+    /// - Parameter isValidationSuccessful: validation status
+    func dismissValidator(_ isValidationSuccessful: Bool)
     /// Dismiss the sheet
     func dismissSheet()
     /// Check if stack can pop a view

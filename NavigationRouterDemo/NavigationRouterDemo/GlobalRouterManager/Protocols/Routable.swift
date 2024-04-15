@@ -8,7 +8,6 @@
 import SwiftUI
 
 public enum NavigationType {
-    case tab
     case push
     case sheet
     case fullScreenCover
@@ -19,26 +18,40 @@ public protocol RouteInfo: Hashable {
     var path: String { get }
 }
 
+public typealias Callback = (Bool) -> Void
+
 public protocol Routable: Hashable, Identifiable {
     associatedtype ViewType: View
     associatedtype T: RouteInfo
     var routeInfo: T { get set }
     var navigationType: NavigationType { get set }
-    var isLoginRequired: Bool { get }
-    var isUserLoggedIn: Bool { get }
     var queryData: Any? { get set }
-    var onDismiss: (() -> Void)? { get set }
-    func getLoginRoute(onDismiss: (() -> Void)?) -> any Routable
+    /// Callback used to get call after succesfully dismissing a view
+    var onDismiss: Callback? { get set }
+    /// Gives access to the user to perform validations on the current route
+    /// - Parameter onDismiss: onDismiss description
+    /// - Returns: Returns a `ValidationRoute (eg. LoginRoute)` or nil
+    /*  Case:
+        1 - If the current view requires any validation the user will be redirected to the given `ValidationRoute` and
+            pause the routing till the user do the validations.
+        
+        2 - If the current is valid and requires no validation or the required validations are already there then pass nil.
+     */
+    func isRouteValid(onDismiss: Callback?) -> (any Routable)?
+    /// This method will be called when the stack required the view to display based on the route
+    /// - Parameters:
+    ///   - router: router description
+    ///   - navigtionType: navigtionType description
+    /// - Returns: View
     func viewToDisplay(router: Router<Self>, _ navigtionType: NavigationType) -> ViewType
-    
-    init(routeInfo: T, navigationType: NavigationType, isLoginRequired: Bool, queryData: Any, onDismiss: (() -> Void)?)
+    /// Route initialization
+    init(routeInfo: T, navigationType: NavigationType, queryData: Any, onDismiss: Callback?)
 }
+
+// MARK: - Default values
 
 extension Routable {
     public var id: Self { self }
-    var isLoginRequired: Bool { false }
-    var isUserLoggedIn: Bool { true }
-    
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

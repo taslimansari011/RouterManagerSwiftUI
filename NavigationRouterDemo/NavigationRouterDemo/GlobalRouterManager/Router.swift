@@ -9,12 +9,17 @@ import SwiftUI
 
 public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     /// Used to programatically control a navigation stack
+    /// Each router will have its own stack and will be managed separately
     @Published public var stack: [Destination] = [] {
         didSet {
             currentPath = stack.map({ route in return route.routeInfo.path }).joined()
         }
     }
+    /// Holds the path of reaching the current screen
     public var currentPath: String = ""
+    /// Holds the pending routes that maybe because of some validation is still pending.
+    private var pendingRoutes: [Destination] = []
+    /// Selected tab value if any tab is also there
     @Published public var selectedTab: Int?
     /// Used to present a view using a sheet
     @Published public var presentingSheet: Destination?
@@ -38,24 +43,27 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     
     /// Routes to the specified `Routable`.
     public func routeTo(_ route: Destination) {
-        if route.isLoginRequired {
-            guard route.isUserLoggedIn else {
-                if let loginRoute = route.getLoginRoute(onDismiss: { [weak self] in
-                    if route.isUserLoggedIn {
-                        print("Dismissed login from onDismiss")
-                        self?.routeTo(route)
-                    }
-                }) as? Destination {
-                    presentSheet(loginRoute)
+        if let validationRoute = route.isRouteValid(onDismiss: { success in
+            /// It is the value returned by the valudator
+            /// It this route require validation than the route will be dependent on  this value to proceed further
+            /// - Parameter success:
+                /// true: Proceed with the remaining path
+                /// false: Halt the path
+            if success {
+                if self.pendingRoutes.isEmpty {
+                    self.routeTo(route)
+                } else {
+                    self.pushMultiple(self.pendingRoutes)
                 }
-                return
             }
+        }) as? Destination {
+            routeTo(validationRoute)
+            return
         }
         switch route.navigationType {
-        case .tab:
-            selectedTab = route.routeInfo.tabIndex
         case .push:
             push(route)
+            updatePendingRoutesWithPushed(route)
         case .sheet:
             presentSheet(route)
         case .fullScreenCover:
@@ -66,6 +74,7 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     /// Navigate to a series of views at once
     /// - Parameter routes: routes description
     public func pushMultiple(_ routes: [Destination]) {
+        pendingRoutes = routes
         routes.forEach { route in
             routeTo(route)
         }
@@ -77,31 +86,38 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
         if routes.isEmpty {
             popToRoot()
         } else {
-            stack = routes
+            stack = []
+            pushMultiple(routes)
         }
     }
     
-    // Pop to the root screen in our hierarchy
+    /// Pop to the root screen in our hierarchy
     public func popToRoot() {
         stack.removeLast(stack.count)
     }
     
-    // Dismisses presented screen or self
+    /// If stack have pushed routes pop the top route else dismiss the presented route.
     public func dismiss() {
         if !stack.isEmpty {
             stack.removeLast()
-        } else if let sheet = isPresented?.wrappedValue {
-            sheet.onDismiss?()
-            isPresented?.wrappedValue = nil
         } else {
-            presentingSheet?.onDismiss?()
             isPresented?.wrappedValue = nil
         }
     }
     
-    /// Dismiss the sheet
+    /// Dismisses presented screen and call the validation callback if there is any
+    public func dismissValidator(_ isValidationSuccessful: Bool = false) {
+        if let sheet = isPresented?.wrappedValue {
+            sheet.onDismiss?(isValidationSuccessful)
+            isPresented?.wrappedValue = nil
+        } else {
+            presentingSheet?.onDismiss?(isValidationSuccessful)
+            isPresented?.wrappedValue = nil
+        }
+    }
+    
+    /// Dismiss the full sheet
     public func dismissSheet() {
-        isPresented?.wrappedValue?.onDismiss?()
         isPresented?.wrappedValue = nil
     }
     
@@ -123,33 +139,74 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
         }
     }
     
-    /// Pop the top screen if possible then Push to the given route
+    /// Pop the top screen if possible then Push to the given route.
     /// - Parameter route: route to be pushed
     public func popAndPush(_ route: Destination) {
         if canPop() {
             dismiss()
         }
-        push(route)
+        routeTo(route)
     }
     
-    private func push(_ appRoute: Destination) {
-        stack.append(appRoute)
-        currentPath.append(appRoute.routeInfo.path)
+    /// Handle any deeplinks from here
+    /// - Parameters:
+    ///   - routes: routes description
+    ///   - isPathPresentInThisStack: isPathPresentInThisStack states if the given route is already present on the stack or not.
+    public func handleDeeplink(routes: [Destination], isPathPresentInThisStack: Bool) {
+        if isPathPresentInThisStack {
+            if let index = stack.lastIndexOfContiguous(routes) {
+                while stack.count > index + 1 {
+                    stack.removeLast()
+                }
+            }
+        } else {
+            pushMultiple(routes)
+        }
     }
     
-    private func presentSheet(_ route: Destination) {
+    /// Checks if the given path is present on this stack or not and return the corresponding Bool value
+    /// - Parameter path: path description
+    /// - Returns: Bool
+    public func isPathPresent(path: String) -> Bool {
+        currentPath.contains(path)
+    }
+}
+
+// MARK: - Private methods
+
+extension Router {
+    /// After successful routing remove the provided route from the pending routes
+    /// - Parameter route: route description
+    fileprivate func updatePendingRoutesWithPushed(_ route: Destination) {
+        if let index = pendingRoutes.firstIndex(of: route) {
+            pendingRoutes.remove(at: index)
+        }
+    }
+    
+    /// Push the given route on the current stack.
+    /// - Parameter route: route description
+    fileprivate func push(_ route: Destination) {
+        stack.append(route)
+        currentPath.append(route.routeInfo.path)
+    }
+    
+    /// Present the given route.
+    /// - Parameter route: route description
+    fileprivate func presentSheet(_ route: Destination) {
         self.presentingSheet = route
     }
     
-    private func presentFullScreen(_ route: Destination) {
+    /// Present the full screen sheet with given route.
+    /// - Parameter route: route description
+    fileprivate func presentFullScreen(_ route: Destination) {
         self.presentingFullScreenCover = route
     }
     
-    // Return the appropriate Router instance based
-    // on `NavigationType`
-    private func router(routeType: NavigationType) -> Router {
+    /// Return the appropriate Router instance based on the `NavigationType`
+    /// For a new sheet pass a new router so that each presented sheet should have its own route.
+    fileprivate func router(routeType: NavigationType) -> Router {
         switch routeType {
-        case .push, .tab:
+        case .push:
             return self
         case .sheet:
             return Router(
@@ -166,21 +223,5 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
                 )
             )
         }
-    }
-    
-    public func handleDeeplink(routes: [Destination], isPathPresentInThisStack: Bool) {
-        if isPathPresentInThisStack {
-            if let index = stack.lastIndexOfContiguous(routes) {
-                while stack.count > index + 1 {
-                    stack.removeLast()
-                }
-            }
-        } else {
-            pushMultiple(routes)
-        }
-    }
-    
-    public func isPathPresent(path: String) -> Bool {
-        currentPath.contains(path)
     }
 }

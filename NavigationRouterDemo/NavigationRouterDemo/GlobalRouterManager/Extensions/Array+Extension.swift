@@ -37,7 +37,7 @@ extension Array where Element : Equatable {
             return nil
         }
 
-        // The index of the match could not exceed data.count-part.count
+        /// The index of the match could not exceed data.count-part.count
         let range = 0...self.count - subArray.count
         var lastIndex: Int?
         range.forEach { index in

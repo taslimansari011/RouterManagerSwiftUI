@@ -7,10 +7,16 @@
 
 import SwiftUI
 
+/// Base Routing view which contains the Navigation View and manages the routing through itself using the router this struct contains.
 public struct RoutingView<Content: View, Destination: Routable>: View {
     @ObservedObject private var router: Router<Destination>
     private let rootContent: () -> Content
-
+    
+    /// RoutingView initializer
+    /// - Parameters:
+    ///   - router: router to manage the routing
+    ///   - routeType: routeType description
+    ///   - content: block which will be called to get the root content
     public init(router: Router<Destination>, _ routeType: Destination.Type, @ViewBuilder content: @escaping () -> Content) {
         self.router = router
         self.rootContent = content
