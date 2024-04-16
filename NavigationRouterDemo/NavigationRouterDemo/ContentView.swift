@@ -88,7 +88,6 @@ struct AppTabbarView: View {
             .tabItem { Label(Tab.myAccount.title, systemImage: Tab.myAccount.systemImage) }
             .tag(2)
         }
-        .tint(.orange)
         .onOpenURL { url in
             openURL(url: url)
         }

@@ -10,9 +10,16 @@ import SwiftUI
 @main
 struct NavigationRouterDemoApp: App {
     @AppStorage("login") var login: Bool = false
+    let router = Router<AppRoute>()
     var body: some Scene {
         WindowGroup {
-            AppTabbarView()
+            /// Uncomment below code to run app with Tabbar
+//            AppTabbarView()
+            
+            /// Uncomment below code to run app without Tabbar
+//            RoutingView(router: router, AppRoute.self) {
+//                MyAccountView(router: router)
+//            }
         }
     }
 }
