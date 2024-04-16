@@ -18,6 +18,10 @@ public protocol RouteInfo: Hashable {
     var path: String { get }
 }
 
+extension RouteInfo {
+    var tabIndex: Int? { nil }
+}
+
 public typealias Callback = (Bool) -> Void
 
 public protocol Routable: Hashable, Identifiable {
