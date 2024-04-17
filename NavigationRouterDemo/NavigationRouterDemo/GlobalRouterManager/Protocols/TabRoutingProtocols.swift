@@ -9,8 +9,9 @@ import Foundation
 
 protocol TabRoutingProtocols {
     associatedtype Destination: Routable
+    associatedtype AppRouter: RoutingProtocols
     /// Each item in the array is a router for each tab item
-    var navigationRouters: [Router<Destination>] { get set }
+    var navigationRouters: [AppRouter] { get set }
     /// It will keep track of the selected tab item
     var selectedTab: Int { get set }
     /// Handle the deep link navigation

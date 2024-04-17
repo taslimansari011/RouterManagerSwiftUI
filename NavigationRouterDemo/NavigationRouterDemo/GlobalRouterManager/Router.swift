@@ -37,8 +37,11 @@ public class Router<Destination: Routable>: ObservableObject, RoutingProtocols {
     
     /// Returns the view associated with the specified `Routable`
     public func view(for route: Destination) -> some View {
-        let router = router(routeType: route.navigationType)
-        return route.viewToDisplay(router: router, route.navigationType)
+        if let router = router(routeType: route.navigationType) as? Destination.AppRouter {
+            return AnyView(route.viewToDisplay(router: router, route.navigationType))
+        } else {
+            return AnyView(EmptyView())
+        }
     }
     
     /// Routes to the specified `Routable`.

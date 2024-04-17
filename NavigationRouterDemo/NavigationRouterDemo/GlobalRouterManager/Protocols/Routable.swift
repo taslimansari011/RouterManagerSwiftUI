@@ -26,6 +26,7 @@ public typealias Callback = (Bool) -> Void
 
 public protocol Routable: Hashable, Identifiable {
     associatedtype ViewType: View
+    associatedtype AppRouter: RoutingProtocols
     associatedtype T: RouteInfo
     var routeInfo: T { get set }
     var navigationType: NavigationType { get set }
@@ -47,7 +48,7 @@ public protocol Routable: Hashable, Identifiable {
     ///   - router: router description
     ///   - navigtionType: navigtionType description
     /// - Returns: View
-    func viewToDisplay(router: Router<Self>, _ navigtionType: NavigationType) -> ViewType
+    func viewToDisplay(router: AppRouter, _ navigtionType: NavigationType) -> ViewType
     /// Route initialization
     init(routeInfo: T, navigationType: NavigationType, queryData: Any, onDismiss: Callback?)
 }
