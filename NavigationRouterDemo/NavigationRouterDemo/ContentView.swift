@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyRouteManager
 
 struct LoginView: View {
     @AppStorage("login") var login: Bool = false

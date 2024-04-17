@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyRouteManager
 
 struct MovieDetails: View {
     let movie: Movie

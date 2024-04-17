@@ -8,26 +8,37 @@
 
 /* Begin PBXBuildFile section */
 		7C2EB3972BA2F42000D20600 /* AppRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2EB3962BA2F42000D20600 /* AppRoutes.swift */; };
+		7C30BFA32BCFD6D600B993EA /* MyRouteManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C30BFA02BCFD6CD00B993EA /* MyRouteManager.framework */; };
+		7C30BFA42BCFD6D600B993EA /* MyRouteManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7C30BFA02BCFD6CD00B993EA /* MyRouteManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7C3A7A452BA98B43004AD2DE /* CommonErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A7A442BA98B43004AD2DE /* CommonErrorView.swift */; };
 		7C3A7A472BA9A427004AD2DE /* MyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A7A462BA9A427004AD2DE /* MyAccountView.swift */; };
-		7C5A7A432BB6DAAA00ECAD12 /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A3A2BB6DAAA00ECAD12 /* RoutingView.swift */; };
-		7C5A7A442BB6DAAA00ECAD12 /* TabRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A3B2BB6DAAA00ECAD12 /* TabRouter.swift */; };
-		7C5A7A452BB6DAAA00ECAD12 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A3D2BB6DAAA00ECAD12 /* Array+Extension.swift */; };
-		7C5A7A462BB6DAAA00ECAD12 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A3E2BB6DAAA00ECAD12 /* Router.swift */; };
-		7C5A7A472BB6DAAA00ECAD12 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A402BB6DAAA00ECAD12 /* Routable.swift */; };
-		7C5A7A482BB6DAAA00ECAD12 /* TabRoutingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A412BB6DAAA00ECAD12 /* TabRoutingProtocols.swift */; };
-		7C5A7A492BB6DAAA00ECAD12 /* RoutingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A7A422BB6DAAA00ECAD12 /* RoutingProtocols.swift */; };
 		7CF79B392B999DB3005289CB /* NavigationRouterDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF79B382B999DB3005289CB /* NavigationRouterDemoApp.swift */; };
 		7CF79B3B2B999DB3005289CB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF79B3A2B999DB3005289CB /* ContentView.swift */; };
 		7CF79B3D2B999DB6005289CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CF79B3C2B999DB6005289CB /* Assets.xcassets */; };
 		7CF79B402B999DB6005289CB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CF79B3F2B999DB6005289CB /* Preview Assets.xcassets */; };
-		7CF79B472B999DDA005289CB /* RouterViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF79B462B999DDA005289CB /* RouterViewOld.swift */; };
 		7CF79B4A2B999F2A005289CB /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF79B492B999F2A005289CB /* MoviesView.swift */; };
 		7CF79B4D2B99A11D005289CB /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF79B4C2B99A11D005289CB /* MovieModel.swift */; };
 		7CF79B4F2B99A12C005289CB /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF79B4E2B99A12C005289CB /* ReviewModel.swift */; };
 		7CF79B512B99A159005289CB /* ReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF79B502B99A159005289CB /* ReviewsView.swift */; };
 		7CF79B532B99A167005289CB /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF79B522B99A167005289CB /* MovieDetailsView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7C30BF9F2BCFD6CD00B993EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7C30BF9A2BCFD6CD00B993EA /* MyRouteManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7C74784E2BCE6BEA004A998B;
+			remoteInfo = MyRouteManager;
+		};
+		7C30BFA12BCFD6CD00B993EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7C30BF9A2BCFD6CD00B993EA /* MyRouteManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7C7478582BCE6BEA004A998B;
+			remoteInfo = MyRouteManagerTests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		7C2EB3FF2BA2FF9C00D20600 /* Embed Frameworks */ = {
@@ -36,6 +47,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				7C30BFA42BCFD6D600B993EA /* MyRouteManager.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,21 +57,14 @@
 /* Begin PBXFileReference section */
 		7C2EB3962BA2F42000D20600 /* AppRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoutes.swift; sourceTree = "<group>"; };
 		7C2EB4002BA9671000D20600 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7C30BF9A2BCFD6CD00B993EA /* MyRouteManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MyRouteManager.xcodeproj; path = ../../Documents/Frameworks/MyRouteManager/MyRouteManager.xcodeproj; sourceTree = "<group>"; };
 		7C3A7A442BA98B43004AD2DE /* CommonErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonErrorView.swift; sourceTree = "<group>"; };
 		7C3A7A462BA9A427004AD2DE /* MyAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountView.swift; sourceTree = "<group>"; };
-		7C5A7A3A2BB6DAAA00ECAD12 /* RoutingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
-		7C5A7A3B2BB6DAAA00ECAD12 /* TabRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabRouter.swift; sourceTree = "<group>"; };
-		7C5A7A3D2BB6DAAA00ECAD12 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
-		7C5A7A3E2BB6DAAA00ECAD12 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		7C5A7A402BB6DAAA00ECAD12 /* Routable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
-		7C5A7A412BB6DAAA00ECAD12 /* TabRoutingProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabRoutingProtocols.swift; sourceTree = "<group>"; };
-		7C5A7A422BB6DAAA00ECAD12 /* RoutingProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingProtocols.swift; sourceTree = "<group>"; };
 		7CF79B352B999DB3005289CB /* NavigationRouterDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavigationRouterDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CF79B382B999DB3005289CB /* NavigationRouterDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouterDemoApp.swift; sourceTree = "<group>"; };
 		7CF79B3A2B999DB3005289CB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7CF79B3C2B999DB6005289CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7CF79B3F2B999DB6005289CB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7CF79B462B999DDA005289CB /* RouterViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterViewOld.swift; sourceTree = "<group>"; };
 		7CF79B492B999F2A005289CB /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
 		7CF79B4C2B99A11D005289CB /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		7CF79B4E2B99A12C005289CB /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
@@ -72,55 +77,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C30BFA32BCFD6D600B993EA /* MyRouteManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7C2EB3A02BA2F95700D20600 /* OldCode */ = {
+		7C30BF872BCFD66B00B993EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7CF79B462B999DDA005289CB /* RouterViewOld.swift */,
-			);
-			path = OldCode;
-			sourceTree = "<group>";
-		};
-		7C2EB3CE2BA2FEEA00D20600 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
+				7C30BF9A2BCFD6CD00B993EA /* MyRouteManager.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7C5A7A392BB6DAAA00ECAD12 /* GlobalRouterManager */ = {
+		7C30BF9B2BCFD6CD00B993EA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7C5A7A3A2BB6DAAA00ECAD12 /* RoutingView.swift */,
-				7C5A7A3B2BB6DAAA00ECAD12 /* TabRouter.swift */,
-				7C5A7A3C2BB6DAAA00ECAD12 /* Extensions */,
-				7C5A7A3E2BB6DAAA00ECAD12 /* Router.swift */,
-				7C5A7A3F2BB6DAAA00ECAD12 /* Protocols */,
+				7C30BFA02BCFD6CD00B993EA /* MyRouteManager.framework */,
+				7C30BFA22BCFD6CD00B993EA /* MyRouteManagerTests.xctest */,
 			);
-			path = GlobalRouterManager;
-			sourceTree = "<group>";
-		};
-		7C5A7A3C2BB6DAAA00ECAD12 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				7C5A7A3D2BB6DAAA00ECAD12 /* Array+Extension.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		7C5A7A3F2BB6DAAA00ECAD12 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				7C5A7A402BB6DAAA00ECAD12 /* Routable.swift */,
-				7C5A7A412BB6DAAA00ECAD12 /* TabRoutingProtocols.swift */,
-				7C5A7A422BB6DAAA00ECAD12 /* RoutingProtocols.swift */,
-			);
-			path = Protocols;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		7CF79B2C2B999DB3005289CB = {
@@ -128,7 +106,7 @@
 			children = (
 				7CF79B372B999DB3005289CB /* NavigationRouterDemo */,
 				7CF79B362B999DB3005289CB /* Products */,
-				7C2EB3CE2BA2FEEA00D20600 /* Frameworks */,
+				7C30BF872BCFD66B00B993EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,8 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				7C2EB4002BA9671000D20600 /* Info.plist */,
-				7C5A7A392BB6DAAA00ECAD12 /* GlobalRouterManager */,
-				7C2EB3A02BA2F95700D20600 /* OldCode */,
 				7CF79B4B2B99A102005289CB /* DataModels */,
 				7CF79B482B999F1A005289CB /* Views */,
 				7CF79B382B999DB3005289CB /* NavigationRouterDemoApp.swift */,
@@ -233,12 +209,35 @@
 			mainGroup = 7CF79B2C2B999DB3005289CB;
 			productRefGroup = 7CF79B362B999DB3005289CB /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7C30BF9B2BCFD6CD00B993EA /* Products */;
+					ProjectRef = 7C30BF9A2BCFD6CD00B993EA /* MyRouteManager.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				7CF79B342B999DB3005289CB /* NavigationRouterDemo */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7C30BFA02BCFD6CD00B993EA /* MyRouteManager.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MyRouteManager.framework;
+			remoteRef = 7C30BF9F2BCFD6CD00B993EA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7C30BFA22BCFD6CD00B993EA /* MyRouteManagerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MyRouteManagerTests.xctest;
+			remoteRef = 7C30BFA12BCFD6CD00B993EA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7CF79B332B999DB3005289CB /* Resources */ = {
@@ -257,22 +256,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C5A7A482BB6DAAA00ECAD12 /* TabRoutingProtocols.swift in Sources */,
-				7CF79B472B999DDA005289CB /* RouterViewOld.swift in Sources */,
 				7CF79B4A2B999F2A005289CB /* MoviesView.swift in Sources */,
 				7C3A7A452BA98B43004AD2DE /* CommonErrorView.swift in Sources */,
-				7C5A7A432BB6DAAA00ECAD12 /* RoutingView.swift in Sources */,
 				7C3A7A472BA9A427004AD2DE /* MyAccountView.swift in Sources */,
 				7CF79B532B99A167005289CB /* MovieDetailsView.swift in Sources */,
 				7CF79B4D2B99A11D005289CB /* MovieModel.swift in Sources */,
-				7C5A7A472BB6DAAA00ECAD12 /* Routable.swift in Sources */,
-				7C5A7A462BB6DAAA00ECAD12 /* Router.swift in Sources */,
 				7CF79B512B99A159005289CB /* ReviewsView.swift in Sources */,
 				7C2EB3972BA2F42000D20600 /* AppRoutes.swift in Sources */,
-				7C5A7A492BB6DAAA00ECAD12 /* RoutingProtocols.swift in Sources */,
 				7CF79B3B2B999DB3005289CB /* ContentView.swift in Sources */,
-				7C5A7A442BB6DAAA00ECAD12 /* TabRouter.swift in Sources */,
-				7C5A7A452BB6DAAA00ECAD12 /* Array+Extension.swift in Sources */,
 				7CF79B392B999DB3005289CB /* NavigationRouterDemoApp.swift in Sources */,
 				7CF79B4F2B99A12C005289CB /* ReviewModel.swift in Sources */,
 			);

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyRouteManager
 
 struct MoviesView: View {
     @StateObject var router: Router<AppRoute>

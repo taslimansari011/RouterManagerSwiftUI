@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyRouteManager
 
 struct MyAccountView: View {
     @AppStorage("login") var login: Bool = false
@@ -33,35 +34,6 @@ struct MyAccountView: View {
                     login = false
                 }
             }
-        }
-        .onOpenURL { url in
-            openURL(url: url)
-        }
-    }
-    
-    private func openURL(url: URL) {
-        var isValidPath = true
-        let components = url.pathComponents.filter { component in
-            component != "/"
-        }
-        guard !components.isEmpty else {
-            return
-        }
-        let routes =  components.compactMap { component in
-            let queryData = URLComponents(string: url.absoluteString)?.queryItems?.first?.value
-            if let routeInfo = AppRouteInfo(path: component, data: queryData) {
-                let route = AppRoute(routeInfo: routeInfo)
-                return route
-            } else {
-                isValidPath = false
-                return nil
-            }
-        }
-        if isValidPath {
-            let pathPresent = router.isPathPresent(path: url.path())
-            router.handleDeeplink(routes: routes, isPathPresentInThisStack: pathPresent)
-        } else {
-            router.popToRoot()
         }
     }
 }

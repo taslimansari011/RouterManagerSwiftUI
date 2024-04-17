@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyRouteManager
 
 final class AppRoute: Routable {
     @AppStorage("login") var loggedIn: Bool = false
